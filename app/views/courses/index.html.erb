@@ -1,0 +1,48 @@
+<%= render 'layouts/navigation' %>
+
+<div class="container mx-auto text-center mt-3">
+  <h1 class="subpixel-antialiased font-bold text-simanejo text-2xl">Cursos Si Manejo</h1>
+
+  <table class="mx-auto mt-3">
+    <thead>
+      <tr class="bg-simanejo text-white">
+        <th class="w-32 pb-2 pt-1.5">Curso</th>
+        <th class="w-32 pb-2 pt-1.5">Horas</th>
+        <th class="w-32 pb-2 pt-1.5">Costo</th>
+        <th class="w-32 pb-2 pt-1.5">Actions</th>
+      </tr>
+    </thead>
+    <tbody >
+    <% @courses.order(:course_cost).each do |course| %>
+      <tr class="border-b border-gray-400">
+        <td class="font-light pb-2 pt-1.5">
+          <%= course.course_name %>
+        </td>
+        <td class="font-light pb-2 pt-1.5">
+          <%= course.course_hours %> 
+          <% if course.course_hours <= 1 %>
+            hr
+          <% else %>
+            hrs
+          <% end %>
+        </td>
+        <td class="font-light pb-2 pt-1.5">
+          <%= number_to_currency(course.course_cost) %>
+        </td>
+        <td class="font-light pb-2 pt-1.5">
+        <div class="flex justify-center">
+          <div class="mr-3 pr-3 border-r border-gray-400">
+            <%= link_to 'Edit', edit_course_path(course), class: "text-simanejo hover:text-blue-600" %>
+          </div>
+          <div>
+            <%= link_to 'Delete', course_path(course), method: :delete, class: "text-red-800 hover:text-red-600" %>
+          </div>
+        </div>
+          
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Agregar nuevo curso', new_course_path(), class: "block rounded bg-simanejo text-lg text-white mx-auto w-1/4 text-center border-0 pb-3 pt-2 px-10 my-8 hover:bg-red-800" %>
+</div>

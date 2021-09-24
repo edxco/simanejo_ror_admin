@@ -18,7 +18,7 @@ default: &default
   host: localhost
   username: postgres
   password: 6830
-  # port: 5432
+  port: 5432
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
@@ -27,21 +27,21 @@ default: &default
 
 development:
   <<: *default
-  database: tailwindBase_development
+  database: si_manejo_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: tailwindBase
+  # username: postgres
 
   # The password associated with the postgres role (username).
-  #password:
+  # password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
+  host: localhost
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
@@ -61,7 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: tailwindBase_test
+  database: si_manejo_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -85,6 +85,6 @@ test:
 #
 production:
   <<: *default
-  database: tailwindBase_production
-  username: tailwindbase
-  password: <%= ENV['TAILWINDBASE_DATABASE_PASSWORD'] %>
+  database: si_manejo_production
+  username: postgres
+  password: <%= ENV['SI_MANEJO_DATABASE_PASSWORD'] %>

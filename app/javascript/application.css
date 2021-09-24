@@ -1,3 +1,165 @@
 @import "tailwindcss/base";
 @import "tailwindcss/utilities";
 @import "tailwindcss/components";
+
+.border-simanejo {
+  border-left: 2px solid #163964;
+  border-right: 2px solid #163964;
+  border-bottom: 2px solid #163964;
+}
+
+.text-simanejo {
+  color: #163964;
+}
+
+.bg-simanejo {
+  background-color: #163964;
+}
+
+.w-250 {
+  width: 250px;
+}
+
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('Gotham-Bold.eot'); /* IE9 Compat Modes */
+  src: url('Gotham-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Gotham-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Gotham-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('Gotham-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('Gotham-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+.bg-image1 {
+  background-image: url('../assets/images/bg_index1.jpg');
+}
+
+.bg-image2 {
+  background-image: url('../assets/images/bg_index2.jpg');
+}
+
+.bg-image3 {
+  background-image: url('../assets/images/bg_index3.jpg');
+}
+
+.line_input {
+  outline: 0;
+  border-width: 0 0 4px;
+  border-color: #ddd;
+}
+.line_input:focus {
+  border-color: #163964
+}
+
+a:hover {
+  background-color: transparent;
+}
+
+.home a:visited {
+  color: #fff;
+}
+
+.text-form {
+  @apply text-left text-base font-semibold text-gray-700;
+}
+
+.input-form {
+  @apply w-full border-b border-gray-300 text-base outline-none text-gray-600 py-1 px-3 leading-8 focus:border-blue-800;
+}
+
+.select-form {
+  @apply w-full shadow-sm pb-3 pt-2 text-base text-gray-600 pl-3 pr-10 border-b border-gray-300 focus:border-blue-800;
+}
+
+.submit-form {
+  @apply text-white bg-simanejo border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-5;
+}
+
+.receipt {
+  font-family: 'MyWebFont', Fallback, sans-serif;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+.students_tr:nth-child(4n), .students_tr:nth-child(4n-1){
+  background-color: #f2f2f2;
+}
+
+.students_tr:nth-child(4n-2), .students_tr:nth-child(4n-3){
+  background-color: #fff;
+}
+
+.rw-words {
+  display: inline;
+}
+
+.rw-words span {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  overflow: hidden;
+  width: 280px;
+  text-indent: 7px;
+  color: #CB151B;
+}
+
+.rw-words-1 span {
+  animation: rotateWordsFirst 18s linear infinite 0s;
+  color: #CB151B;
+}
+
+.rw-words span:nth-child(2) {
+  animation-delay: 3s;
+  color: #CB151B;
+}
+
+.rw-words span:nth-child(3) {
+  animation-delay: 6s;
+  color: #CB151B;
+}
+
+.rw-words span:nth-child(4) {
+  animation-delay: 9s;
+  color: #CB151B;
+}
+
+.rw-words span:nth-child(5) {
+  animation-delay: 12s;
+  color: #CB151B;
+}
+
+.rw-words span:nth-child(6) {
+  animation-delay: 15s;
+  color: #CB151B;
+}
+
+@keyframes rotateWordsFirst {
+  0% {
+    opacity: 1;
+    animation-timing-function: ease-in;
+    height: 0px;
+  }
+
+  8% {
+    opacity: 1;
+    height: 35px;
+  }
+
+  19% {
+    opacity: 1;
+    height: 35px;
+  }
+
+  25% {
+    opacity: 0;
+    height: 35px;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

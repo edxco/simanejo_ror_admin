@@ -1,0 +1,33 @@
+<% if obj.errors.any? %>
+<div class="fixed inset-0 bg-gray-400 bg-opacity-30 flex justify-center items-center" id="close-form">
+  <div class="mb-10 bg-white p-5 rounded-md shadow-md ">
+
+    <div class="relative">
+      <svg xmlns="http://www.w3.org/2000/svg" class="animate-bounce h-6 w-6 absolute top-0 right-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+
+    <div class="py-5">
+      <p class="font-bold text-red-600 text-base">
+        Error guardando datos!
+      </p>
+      <p class="text-gray-600 text-sm font-semibold">
+        Corriga los siguientes detalles:
+      </p>
+    </div>
+
+    <% obj.errors.full_messages.each do |msg| %>
+    <li class="list-none text-base font-grey-900">
+      <%= msg %>
+    </li>
+    <% end %>
+
+    <div class="text-right mt-5 text-sm text-gray-600">
+      <%= obj.class.name.downcase %> V0.100
+    </div>
+  </div>
+</div>
+<% end %>
+
+<%= javascript_pack_tag 'modal' %>

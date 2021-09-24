@@ -1,0 +1,64 @@
+<%= render 'shared/errors', obj: @instructor  %>
+<%= form_with(model: @instructor, local: true) do |f| %>
+
+<div class="px-14">
+  <div class="flex flex-wrap -m-2">
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :instructor_name, "Nombre", class: "text-form" %>
+      <%= f.text_field :instructor_name,
+            class: "input-form",
+            placeholder: "Nombre" %>
+    </div>
+    <div class="p-2 md:w-1/2 w-full text-left">
+      <%= f.label :last_name, "Apellido", class: "text-form" %>
+      <%= f.text_field :instructor_last_name,
+            class: "input-form", 
+            placeholder: "Apellido" %>
+    </div>
+    <div class="p-2 w-1/2 md:w-1/3 text-left">
+      <%= f.label :phone_number, "Teléfono", class: "text-form" %>
+      <%= f.telephone_field :phone_number,
+            class: "input-form",
+            id: "phoneNumber",
+            placeholder: "Telefono" %>
+    </div>
+    <div class="p-2 w-1/2 md:w-1/3 text-left">
+      <%= f.label :vehicle_brand, "Marca vehiculo", class: "text-form" %>
+      <%= f.text_field :vehicle_brand, 
+        class: "input-form", 
+              placeholder: "Marca vehiculo" %>
+    </div>
+    <div class="p-2 w-full md:w-1/3 text-left">
+      <%= f.label :vehicle_model, "Modelo Vehiculo ", class: "text-form" %>
+      <%= f.text_field :vehicle_model,
+            class: "input-form",
+            placeholder: "Modelo del vehiculo" %>
+    </div>
+    <div class="p-2 w-full md:w-1/3 text-left">
+      <%= f.label :plate_number, "Placas ", class: "text-form" %>
+      <%= f.text_field :plate_number,
+            class: "input-form",
+            placeholder: "Direccion" %>
+    </div>
+    <div class="p-2 w-full md:w-1/3 text-left">
+      <%= f.label :car_color, "Color ", class: "text-form" %>
+      <%= f.select(:car_color, @color.map { |key, value| value }, { prompt: "Selecciona opcion", selected: @instructor.car_color },
+                { :class => "select-form"}) %>
+    </div>
+    <div class="p-2 w-full md:w-1/3 text-left">
+      <%= f.label :transmission, "Transmision ", class: "text-form" %>
+      <%= f.select(:transmission, @transmission.map { |key, value| value }, { prompt: "Selecciona opcion", selected: @instructor.transmission },
+                { class: "select-form"}) %>
+    </div>
+    <div class="w-full text-right p-2 mt-2">
+      <span class="text-form mr-2 text-gray-600">¿Es externo? </span><%= f.check_box :external, checked: false, class: "h-4 w-4" %>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gradient-to-br from-blue-50 to-blue-200 text-right mt-8 pr-14 pb-5">
+  <%= f.submit class: "submit-form" %>
+</div>
+<% end %>
+
+<%= javascript_pack_tag 'phonenumber' %>

@@ -1,0 +1,62 @@
+<%= render 'shared/errors', obj: @appointment  %>
+<%= form_with(model: @appointment, local: true) do |f| %>
+<div class="px-14">
+  <div class="flex flex-wrap -m-2">
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :status, "Status *", class: "text-left text-base font-semibold text-red-600" %>
+      <%= f.select(:status, @statuslist.map { |key, value| value }, 
+        {prompt: "Status", selected: @appointment.status },
+        { class: "select-form text-right"}) %>
+    </div>
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :payment_type, "Forma de pago *", class: "text-form" %>
+      <%= f.select(:payment_type, @paymentlist.map { |key, value| value }, 
+        {prompt: "Forma de pago", selected: @appointment.payment_type },
+        { class: "select-form text-right"}) %>
+    </div>
+    <%= f.hidden_field :student_id %>
+    <%
+=begin%>
+ <div class="p-2 w-full">
+      <%= f.label :student_id, "Alumno *", class: "text-form" %>
+      <%= @appointment.student.student_name %> <%= @appointment.student.last_name %>
+      <%= f.collection_select(:student_id, Student.all, :id, "first_last_name", {prompt: "Nombre del Alumno", 
+        selected: @appointment.student}, 
+        {class: "select-form"}) %> 
+    </div> 
+<%
+=end%>
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :course_id, "Curso *", class: "text-form" %>
+      <%= f.collection_select(:course_id, Course.all, :id, :course_name, {prompt: "Selecciona un curso", 
+        selected: @appointment.course}, 
+        {class: "select-form"}) %>
+    </div>
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :instructor_id, "Instructor *", class: "text-form" %>
+      <%= f.collection_select(:instructor_id, Instructor.all, :id, :instructor_name, {prompt: "Selecciona un instructor", 
+        selected: @appointment.instructor}, 
+        {class: "select-form"}) %>
+    </div>
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :start_date, "Fecha de inicio *", class: "text-form" %> 
+      <%= f.date_field :start_date,
+              class: "input-form",
+              placeholder: "Fecha de inicio" %>
+      <p class="mt-1 text-gray-400">Hoy es <%= I18n.l Date.today, format: :long %></p>
+    </div>
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :start_time, "Hora de inicio *", class: "text-form" %>
+      <%= f.time_field :start_time,
+              class: "input-form",
+              placeholder: "Hora de inicio" %>
+      <p class="mt-1 text-gray-400">Medio dia es pm</p>
+    </div>
+  </div>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-blue-200 text-right mt-8 pr-14 pb-5">
+  <%= f.submit class: "submit-form"%>
+</div>
+<% end %>
+
+<%= javascript_pack_tag 'phonenumber' %>

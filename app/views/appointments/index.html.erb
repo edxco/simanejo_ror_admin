@@ -1,0 +1,98 @@
+<%= render 'layouts/navigation' %>
+
+<div class="container mx-auto text-center mt-3">
+  <h1 class="subpixel-antialiased font-bold text-simanejo text-2xl">Horarios</h1>
+  <p>
+    Total Acumulado Global:<br>
+    <%= number_to_currency(@appointments_global_sum) %>
+  </p>
+
+  <div class="w-full flex">
+    <div class="w-3/4 text-left">
+      <p>Hoy es <%= I18n.l Date.today, format: :long %></p>
+      <p>Viendo la semana: <%= days_of_week() %></p>
+    </div>
+    <div  class="w-1/4">
+      Selecciona semana
+    </div>
+  </div>
+
+  <%= will_paginate @appointments, :container => false %>
+
+  <div class="w-full mx-auto">
+    <% @appointments.each do |appointment| %>
+    <div class="bg-white shadow rounded my-6">
+      <div class="md:flex w-full border rounded-md my-3">
+        <div class="flex w-full md:w-3/4 text-left p-3.5">
+          <div class="px-2 pt-4 bg-gray-300 rounded-md w-32">
+            <div class="bg-blue-50 border rounded-md py-1.5 px-2 w-full font-bold"><%= appointment.status.upcase %></div>
+            <p class="text-simanejo text-base text-white mt-1 pl-2"><%= appointment.course.course_name %></p>
+            <p class="text-simanejo pl-2"><%= appointment.payment_type %></p>
+          </div>
+          <div class="pl-3 md:pl-10 text-gray-500">
+            <p class="font-bold text-lg">
+              <%= link_to(student_path(appointment.student), class:"hover:text-red-600 cursor-pointer", style: "color: #163964;") do%>
+              <%= appointment.student.student_name %> <%= appointment.student.last_name %>
+              <% end %>
+            </p>
+            <p class="">
+              Inicia <span class="font-bold text-gray-800"><%= I18n.l appointment.start_date, format: :show %> 
+              <%= appointment.start_time.strftime("%I:%M %p") %></span>
+            </p>
+            <p>
+              <%= appointment.student.street %> <span class="text-black">|</span>
+              <span class="italic"><%= appointment.student.address %></span>
+            </p>
+            <p><%= appointment.student.city %></p>
+            <p class="font-bold">
+              <%= appointment.instructor.instructor_name %>
+              <% if appointment.instructor.external == true %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-700 inline p-0 m-0" viewBox="0 0 20 20"
+                fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                  clip-rule="evenodd" />
+              </svg>
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <div
+          class="w-full bg-gray-100 border-t-1 md:w-1/4 md:text-left md:border-l md:pl-5 border-gray-200 p-2 text-center md:text-left">
+          <p class="hidden md:block text-simanejo mb-1.5">Por cobrar:</p>
+          <span class="hidden md:block md:inline bg-simanejo font-bold text-white p-1.5">
+            <%= number_to_currency(income(appointment.instructor.external, appointment.course.course_cost)) %>
+          </span>
+          <p class="hidden md:block mb-2 text-gray-500 mt-3">Acciones rápidas:</p>
+          <div class="flex item-center justify-center md:justify-start">
+            <%= link_to(edit_appointment_path(appointment), class: "w-6 h-6 md:w-4 md:h-4 h cursor-pointer") do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="text-gray-500 hover:text-gray-700">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+            <% end %>
+            <%= link_to(pdf_appointment_path(appointment), class: "w-6 h-6 md:w-4 md:h-4 mx-5 md:mx-3 cursor-pointer") do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="text-gray-500 hover:text-gray-700">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <% end %>
+            <%= link_to(appointment_path(appointment), method: :delete, class: "w-6 h-6 md:w-4 md:h-4 cursor-pointer") do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              class="text-red-500 hover:text-red-700">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+    <%= link_to 'Nuevo horario', students_path(), class: "block rounded bg-simanejo text-lg font-bold tracking-wide mx-auto w-1/2 text-center border-0 pb-3 pt-2 px-10 my-8 hover:bg-red-800", style: "color: #fff" %>
+</div>
+
+
+</div>

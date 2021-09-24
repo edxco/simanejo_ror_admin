@@ -1,0 +1,167 @@
+<div class="mx-auto h-96 receipt" style="width: 918px; height: 1188px; padding: 0 100px">
+  <div class="w-full flex items-center" style="height: 100px">
+    <%=image_tag ("simanejo-logo.png"), class: "h-16 " %>
+  </div>
+  <%# Second row %>
+  <div class="w-full flex" style="height: 45px">
+    <div class="w-3/5 bg-red-600">
+      &nbsp;
+    </div>
+    <div class="w-2/5 flex">
+      <div class="w-3/4"><%=image_tag ("recibo.jpg"), style: "height: 45px", class: "mx-auto" %></div>
+      <div class="w-1/4 bg-red-600">&nbsp;</div>
+    </div>
+  </div>
+  <%# Third row %>
+  <div class="w-full flex" style="height: 178px">
+    <div class="w-7/12">
+      <p class="text-xl text-gray-800 receipt mb-4 mt-3">
+        <%= @appointment.student.student_name %> <%= @appointment.student.last_name %>
+      </p>
+      <p class="text-lg text-gray-700 receipt leading-tight mb-4">
+        <%= @appointment.student.street %><br/>
+        <%= @appointment.student.address %>
+      </p>
+      <p class="text-lg text-gray-700 receipt leading-tight">
+        <%= @appointment.student.phone_number %>
+      </p>
+    </div>
+    <div class="w-5/12 text-right self-end">
+      <p class="receipt text-lg mb-4">
+        <span class="text-gray-800 mr-4">No. Recibo </span> <span class="text-red-600">SIPUE-02426</span> <br>
+        <span class="text-gray-800 mr-4">Fecha </span> <span class="text-gray-700"><%= Time.now.strftime("%d / %m / %Y") %></span>
+      </p>
+      <p class="receipt text-lg mb-4 leading-tight">
+        <span class="text-gray-800">Forma de pago</span><br>
+        <span class="text-gray-700 text-sm">Efectivo / Recibido por el instructor</span>
+      </p>
+    </div>
+  </div>
+  <%# Fourth row %>
+  <div class="w-full flex" style="height: 199px">
+    <div class="w-4/6 pr-2">
+      <div class="bg-simanejo py-2.5 px-5">
+        <span class="text-white text-lg">CURSO</span>
+      </div>
+      <div class="border-simanejo flex">
+      <div>
+        <p class="text-lg receipt leading-snug px-5 py-2.5">
+          <span class="text-red-600">CURSO:</span><br>
+          <span class="text-red-600">INICIA:</span><br>
+          <span class="text-red-600">DURACIÓN:</span><br>
+          <span class="text-red-600">HORA INICIO:</span><br>
+          <span class="text-red-600">TRANSMISIÓN:</span><br>
+        </p>
+      </div>
+      <div>
+        <p class="text-lg receipt leading-snug px-5 py-2.5">
+          <span class="text-simanejo"><%= @appointment.course.course_name %></span><br>
+          <span class="text-simanejo"><%= @appointment.start_date %></span><br>
+          <span class="text-simanejo"><%= @appointment.course.course_hours %> hrs</span><br>
+          <span class="text-simanejo"><%= @appointment.start_time %></span><br>
+          <span class="text-simanejo"><%= @appointment.instructor.transmission %></span><br>
+        </p>
+      </div>
+      </div>
+    </div>
+    <div class="w-2/6">
+      <div class="text-right bg-red-500">
+        <%=image_tag ("qr-simanejo.png"), class: "float-right h-full w-full" %>
+      </div>
+    </div>
+  </div>
+  <%# 5th row %>
+  <div class="w-full py-6" style="height: 190px">
+    <div class="bg-simanejo py-2.5 px-5">
+      <span class="text-white text-lg">DATOS DEL INSTRUCTOR</span>
+    </div>
+    <div class="border-simanejo flex">
+      <div>
+        <p class="text-lg receipt leading-snug px-5 py-5">
+          <span class="text-red-600">INSTRUCTOR:</span><br>
+          <span class="text-red-600">VEHICULO:</span><br>
+        </p>
+      </div>
+      <div>
+        <p class="text-lg receipt leading-snug px-5 py-5">
+          <span class="text-simanejo"><%= @appointment.instructor.instructor_name %></span><br>
+          <span class="text-simanejo"><%= @appointment.instructor.vehicle_model %> <%= @appointment.instructor.vehicle_brand %></span><br>
+        </p>
+      </div>
+    </div>
+  </div>
+  <%# 6th row %>
+  <div class="w-full flex" style="height: 204px">
+    <div class="w-7/12">
+      <p class="text-lg text-gray-800 receipt mb-4 mt-3">
+        ¡Gracias por su preferencia!<br>
+        Términos y condiciones
+      </p>
+      <p class="text-sm text-gray-700 receipt leading-tight pr-7 text-justify">
+        Éste recibo ampara los servicios descritos y una vez iniciando los mismos el alumno deberá terminar 
+        en la transmisión que ampara este recibo, bajo los términos que ampara este recibo, bajo los 
+        términos y condiciones en:
+      </p>
+      <p class="text-base text-gray-800 receipt">
+        http://simanejo.com/escuela-de-manejo.html
+      </p>
+    </div>
+
+    <div class="w-5/12 text-right mt-5">
+      <div class="flex mb-14">
+        <div class="ml-6 receipt text-lg text-gray-800 mb-4">
+          <span class="mr-4">Subtotal </span>
+          <span class="mr-4">Descuento </span>
+        </div>
+        <div class="receipt text-lg mb-4">
+          <span class="text-gray-800 mr-4"><%= number_to_currency(@appointment.course.course_cost, locale: :en).gsub(/\.00$/, "") %></span>
+          <span class="text-gray-800 mr-4">- </span>
+        </div>
+      </div>
+      <div class="flex w-full bg-simanejo text-white text-2xl p-2">
+        <div class="w-1/2">
+          Total
+        </div>
+        <div class="w-1/2">
+          <%= number_to_currency(@appointment.course.course_cost, locale: :en).gsub(/\.00$/, "") %>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <%# Notas y avisos %>
+  <div class="w-full mt-5" style="height: 157px">
+    <div class="flex bg-simanejo text-white py-4 pr-4">
+      <div class="w-1/5">
+        <%= image_tag ("reciclar.png"), class: "w-7 mx-auto" %>
+      </div>
+      <div class="w-4/5 text-sm text-right self-center">
+        Comprometidos con el medio ambiente, emitimos comprobantes digitales
+      </div>
+    </div>
+    <div class="flex bg-red-600 text-white py-4 pr-4">
+      <div class="w-1/5">
+        <%= image_tag ("warning.png"), class: "w-10 mx-auto" %>
+      </div>
+      <div class="w-4/5 text-sm text-right">
+        Cualquier convenio con el instructor sin previo aviso a la oﬁcina de su ciudad sera responsabilidad del alumno sin obligación de Si Manejo
+      </div>
+    </div>
+  </div>
+  <%# Linea divisoria %>
+  <div class="bg-simanejo h-2.5">
+    &nbsp;
+  </div>
+  <%# Datos de contacto %>
+  <div class="w-full">
+    <div class="flex justify-between text-xs pt-9">
+      <div class="w-2/5 text-center">Torre Ejecutiva del Triangulo Piso 5</div>
+      <div class="border-l-2 border-red-600 w-1/5 text-center">222 688 7881</div>
+      <div class="border-l-2 border-red-600 w-1/5 text-center">222 926 8221</div>
+      <div class="border-l-2 border-red-600 w-1/5 text-center">www.simanejo.com</div>
+    </div>
+  </div>
+</div>
+
+<%= javascript_pack_tag 'js_flag' %>

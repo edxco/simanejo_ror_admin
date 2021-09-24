@@ -1,0 +1,13 @@
+<div class="text-center mt-3">
+  <h1 class="subpixel-antialiased font-bold text-gray-600 text-2xl">Showing Course of Si Manejo</h1>
+
+  <p class="mt-3">
+    <strong class="text-simanejo">Nombre del curso:</strong> <%= @course.name %>
+  </p>
+  <p>
+    <strong class="text-simanejo">Horas del curso:</strong> <%= @course.hours %> hrs
+  </p>
+  <p>
+    <strong class="text-simanejo">Costo del curso:</strong> <%= number_to_currency(@course.cost) %>
+  </p>
+</div>

@@ -1,0 +1,72 @@
+<%= render 'layouts/navigation' %>
+
+<div class="container mx-auto text-center mt-3">
+  <h1 class="subpixel-antialiased font-bold text-simanejo text-2xl">Listado de Instructores</h1>
+
+  <%= will_paginate @instructors, :container => false %>
+  <div class="w-full lg:w-5/6 mx-auto">
+    <div class="bg-white shadow-md rounded my-6">
+      <table class="min-w-max w-full table-auto">
+      <thead>
+        <tr class="bg-simanejo text-white uppercase text-sm leading-normal">
+          <th class="py-3 px-6 text-left">Nombre</th>
+          <th class="py-3 px-6 text-center">Teléfono</th>
+          <th class="py-3 px-6 text-center">Auto</th>
+          <th class="py-3 px-6 text-center">Placas</th>
+          <th class="py-3 px-6 text-center">Transmision</th>
+          <th class="py-3 px-6 text-center">Externo</th>
+          <th class="py-3 px-6 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-600 text-sm font-light">
+      <% @instructors.each do |instructor| %>
+        <tr class="border-b border-gray-200 hover:bg-gray-100">
+          <td class="py-3 px-6 text-left whitespace-nowrap">
+            <div class="flex items-center">
+              <span class="font-medium">
+                <%= instructor.instructor_name %> <%= instructor.instructor_last_name %>
+              </span>
+            </div>
+          </td>
+          <td class="py-3 px-6 text-center">
+              <%= number_to_phone(instructor.phone_number, delimiter: " ") %>
+          </td>
+          <td class="py-3 px-6 text-center">
+                <%= instructor.vehicle_brand %> <%= instructor.vehicle_model %>
+          </td>
+          <td class="py-3 px-6 text-center">
+            <%= instructor.plate_number %>
+          </td>
+          <td class="py-3 px-6 text-center">
+            <%= instructor.transmission %>
+          </td>
+          <td class="py-3 px-6 text-simanejo">
+            <% if instructor.external == true %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+              </svg>
+            <% end %>
+          </td>
+          <td class="py-3 px-6 text-center">
+            <div class="flex item-center justify-center cursor-pointer"> 
+              <%= link_to(edit_instructor_path(instructor), class: "w-4 mr-2 transform hover:text-purple-500 hover:scale-110 cursor-pointer") do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              <% end %>
+              <%= link_to(instructor_path(instructor), method: :delete, class: "w-4 mr-2 transform cursor-pointer") do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="text-red-600 hover:text-gray-400 hover:scale-110" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+      </thead>
+    </table>
+    </div>
+  </div>
+  <%= link_to 'Agregar nuevo instructor', new_instructor_path(), class: "block rounded bg-simanejo text-lg mx-auto w-1/4 text-center border-0 pb-3 pt-2 px-10 my-8 hover:bg-red-800", style: "color: #fff" %>
+</div>

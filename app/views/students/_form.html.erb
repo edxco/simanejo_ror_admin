@@ -1,0 +1,62 @@
+<%= render 'shared/errors', obj: @student  %>
+<%= form_with(model: @student, local: true) do |f| %>
+<div class="px-14">
+  <div class="flex flex-wrap -m-2">
+
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :student_name, "Nombre del estudiante *", class: "text-form" %>
+      <%= f.text_field :student_name,
+              class: "input-form",
+              placeholder: "Nombre" %>
+    </div>
+    <div class="p-2 md:w-1/2 w-full text-left">
+      <%= f.label :last_name, "Apellido del estudiante *", class: "text-form" %>
+      <%= f.text_field :last_name,
+              class: "input-form", 
+              placeholder: "Apellido" %>
+    </div>
+    <div class="p-2 w-1/2 md:w-1/3 text-left">
+      <%= f.label :phone_number, "Teléfono *", class: "text-form" %>
+      <%= f.telephone_field :phone_number,
+              class: "input-form",
+              id: "phoneNumber",
+              placeholder: "Telefono" %>
+    </div>
+    <div class="p-2 w-1/2 md:w-1/3 text-left">
+      <%= f.label :bday, "Cumpleaños", class: "text-form" %>
+      <%= f.date_field :bday,
+              class: "input-form",
+              placeholder: "dd/mm/aaaa" %>
+    </div>
+    <div class="p-2 w-full md:w-1/3 text-left">
+      <%= f.label :email, "Email *", class: "text-form" %>
+      <%= f.text_field :email,
+              class: "input-form",
+              placeholder: "nombre@mail.com" %>
+    </div>
+    <div class="p-2 w-full text-left">
+      <%= f.label :street, "Calle y número *", class: "text-form" %>
+      <%= f.text_field :street,
+              class: "input-form",
+              placeholder: "Calle y número" %>
+    </div>
+    <div class="p-2 w-full md:w-2/3 text-left">
+      <%= f.label :address, "Colonia *", class: "text-form" %>
+      <%= f.text_field :address,
+              class: "input-form",
+              placeholder: "Colonia" %>
+    </div>
+    <div class="p-2 w-full md:w-1/3 text-left">
+      <%= f.label :city, "Ciudad *", class: "text-form" %>
+      <%= f.select(:city, @citylist.map { |key, value| value }, {prompt: "Selecciona una opcion", selected: @student.city },
+                { :class => "select-form"}) %>
+    </div>
+
+  </div>
+</div>
+<div class="bg-gradient-to-br from-blue-50 to-blue-200 text-right mt-8 pr-14 pb-5">
+  <%= f.submit class: "submit-form"%>
+</div>
+<% end %>
+
+<%= javascript_pack_tag 'phonenumber' %>

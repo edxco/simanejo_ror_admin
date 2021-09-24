@@ -1,6 +1,5 @@
 class StaticController < ApplicationController
-
-  def index
+  def home
+    redirect_to students_path if logged_in?
   end
-
 end

@@ -1,0 +1,44 @@
+<%= render 'layouts/navigation' %>
+
+<div class="container mx-auto text-center mt-3">
+  <h1 class="subpixel-antialiased font-bold text-simanejo text-2xl">Usuarios del administrador</h1>
+
+  <table class="mx-auto mt-3 text-lg">
+    <thead>
+      <tr class="bg-simanejo text-white">
+        <th class="w-64 pb-2 pt-1.5">Nombre</th>
+        <th class="w-48 pb-2 pt-1.5">Email</th>
+        <th class="w-52 pb-2 pt-1.5">Creado</th>
+        <th class="w-32 pb-2 pt-1.5">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.order(:created_at).each do |user| %>
+      <tr class="users_tr ">
+        <td class="pb-2 pt-1.5 pl-3 text-base">
+          <%= user.username %>
+        </td>
+        <td class="pb-2 pt-1.5 text-base">
+          <%= user.username_email %>
+        </td>
+        <td class="pb-2 pt-1.5 text-base">
+          <%= time_ago_in_words(user.created_at) %>
+        </td>
+        <td class="pb-2 pt-1.5 text-base">
+          <div class="flex justify-center">
+            <div class="mr-3 pr-3 border-r border-gray-400">
+              <%= link_to 'Password', edit_user_path(user), class: "text-simanejo hover:text-blue-600" %>
+            </div>
+            <div>
+              <%= link_to 'Borrar', user_path(user), method: :delete, class: "text-red-800 hover:text-red-600" %>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Agregar nuevo usuario', register_path(), class: "block rounded bg-simanejo text-lg text-white mx-auto md:w-1/2 text-center border-0 pb-3 pt-2 px-10 my-8 hover:bg-red-800" %>
+</div>
+
+<%= javascript_pack_tag 'nav' %>

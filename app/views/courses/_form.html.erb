@@ -1,0 +1,31 @@
+<%= render 'shared/errors', obj: @course %>
+<%= form_with(model: @course, local: true) do |f| %>
+<div class="px-14">
+  <div class="flex flex-wrap -m-2">
+
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :student_name, "Curso *", class: "text-form" %>
+      <%= f.text_field :course_name,
+        class: "input-form",
+        placeholder: "Nombre del curso" %>
+    </div>
+    <div class="p-2 md:w-1/2 w-full">
+      <%= f.label :student_name, "Horas *", class: "text-form" %>
+      <%= f.number_field :course_hours,
+        class: "input-form",
+        placeholder: "Horas" %>
+    </div>
+    <div class="p-2 w-full">
+      <%= f.label :student_name, "Costo *", class: "text-form" %>
+      <%= f.number_field :course_cost,
+        class: "input-form",
+        placeholder: "Costo" %>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gradient-to-br from-blue-50 to-blue-200 text-right mt-8 pr-14 pb-5">
+  <%= f.submit class: "submit-form" %>
+</div>
+
+<% end %>

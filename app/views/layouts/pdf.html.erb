@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'screen' %>
+    <%= stylesheet_pack_tag 'application', media: 'screen' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <%# = javascript_pack_tag ‘pdf’, ‘data-turbolinks-track’: ‘reload’, host: ‘webpacker:3035’ %>
+    <%# = stylesheet_pack_tag ‘pdf’, media: ‘all’, ‘data-turbolinks-track’: ‘reload’, host: ‘webpacker:3035’ %>
+    <%
+=begin%>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload', host: 'webpacker:3035' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', host: 'webpacker:3035' %> 
+
+
+ <%= stylesheet_link_tag "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" %> 
+<%
+=end%>
+    
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>
